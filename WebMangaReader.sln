@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMangaReader", "WebMangaReader\WebMangaReader.csproj", "{71EB132A-4D03-4828-B689-B66F94FB1E6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Entities", "Data.Entities\Data.Entities.csproj", "{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5612A890-4EAB-411C-9E7B-99689E5C270A}
+	EndGlobalSection
+EndGlobal
