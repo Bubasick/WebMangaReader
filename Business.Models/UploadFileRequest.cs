@@ -1,4 +1,4 @@
-﻿namespace WebMangaReader
+﻿namespace Business.Models
 {
     public class UploadFileRequest
     {

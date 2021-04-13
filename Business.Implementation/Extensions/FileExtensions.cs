@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.StaticFiles;
 
-namespace WebMangaReader
+namespace Business.Implementation.Extensions
 {
     public static class FileExtensions
     {

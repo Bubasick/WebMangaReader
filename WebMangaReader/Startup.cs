@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Business.Abstraction;
+using Business.Implementation.Services;
 
 namespace WebMangaReader
 {

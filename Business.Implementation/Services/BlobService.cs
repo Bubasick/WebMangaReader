@@ -5,8 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using Business.Abstraction;
+using Business.Implementation.Extensions;
+using BlobInfo = Business.Models.BlobInfo;
 
-namespace WebMangaReader
+namespace Business.Implementation.Services
 {
     public class BlobService : IBlobService
     {

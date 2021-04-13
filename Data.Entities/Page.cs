@@ -1,9 +1,11 @@
-﻿namespace Data.Entities
+﻿using System;
+
+namespace Data.Entities
 {
-    public class Image
+    public class Page : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public Guid Guid { get; set; }
         public Chapter Chapter { get; set; }
         public int ChapterId { get; set; }
     }

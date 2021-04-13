@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Business.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Azure.Storage.Blobs.Models;
 
-namespace WebMangaReader
+namespace Business.Abstraction
 {
     public interface IBlobService
     {

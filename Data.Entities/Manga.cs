@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace Data.Entities
 {
-    public class Manga
+    public class Manga : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string AuthorName { get; set; }
         public DateTime ReleaseDate { get; set; }   

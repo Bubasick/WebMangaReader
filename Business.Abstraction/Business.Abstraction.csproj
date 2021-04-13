@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Business.Abstraction\Business.Abstraction.csproj" />
-    <ProjectReference Include="..\Business.Implementation\Business.Implementation.csproj" />
+    <ProjectReference Include="..\Business.Models\Business.Models.csproj" />
   </ItemGroup>
-
 
 </Project>
