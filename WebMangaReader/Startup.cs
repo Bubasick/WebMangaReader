@@ -10,9 +10,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Azure.Storage.Blobs;
 using Business.Abstraction;
+using Business.Implementation;
 using Business.Implementation.Services;
+using Data.Implementation;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebMangaReader
 {
@@ -32,6 +36,11 @@ namespace WebMangaReader
             services.AddSingleton(x =>
                 new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
             services.AddSingleton<IBlobService,BlobService>();
+            services.AddDbContext<MangaDbContext>(x=>  x.UseNpgsql(Configuration.GetValue<string>("DefaultConnection")));
+            services.AddTransient<IMangaService, MangaService>();
+            var mapperConfig = new MapperConfiguration(c => c.AddProfile(new AutoMapperProfile()));
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
