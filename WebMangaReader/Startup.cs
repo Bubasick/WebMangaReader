@@ -36,8 +36,10 @@ namespace WebMangaReader
             services.AddSingleton(x =>
                 new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
             services.AddSingleton<IBlobService,BlobService>();
-            services.AddDbContext<MangaDbContext>(x=>  x.UseNpgsql(Configuration.GetValue<string>("DefaultConnection")));
+            services.AddDbContext<MangaDbContext>(x =>  x.UseNpgsql(Configuration.GetValue<string>("DefaultConnection")));
             services.AddTransient<IMangaService, MangaService>();
+            services.AddTransient<IChapterService, ChapterService>();
+            services.AddTransient<IPageService, PageService>();
             var mapperConfig = new MapperConfiguration(c => c.AddProfile(new AutoMapperProfile()));
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -54,8 +56,6 @@ namespace WebMangaReader
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

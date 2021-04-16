@@ -3,15 +3,17 @@ using System;
 using Data.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Implementation.Migrations
 {
     [DbContext(typeof(MangaDbContext))]
-    partial class MangaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210414091223_addContentType")]
+    partial class addContentType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +75,8 @@ namespace Data.Implementation.Migrations
                     b.Property<int>("ChapterId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ContentType")
-                        .HasColumnType("text");
+                    b.Property<int>("ContentType")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uuid");

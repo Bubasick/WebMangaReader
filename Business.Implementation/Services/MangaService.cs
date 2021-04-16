@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Abstraction;
@@ -7,6 +9,7 @@ using Business.Models.DTO;
 using Data.Entities;
 using Data.Implementation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Business.Implementation.Services
 {
@@ -22,9 +25,13 @@ namespace Business.Implementation.Services
         }
 
         public async Task<MangaDto> GetById(int id)
-        {
-           var result =  await _dbContext.Mangas.FirstOrDefaultAsync(x => x.Id == id);
-           return _mapper.Map<Manga,MangaDto>(result);
+        { 
+            var result =  await _dbContext.Mangas.FirstOrDefaultAsync(x => x.Id == id);
+            if (result is null)
+            {
+                throw new ArgumentException($"{nameof(id)} is not valid.");
+            }
+            return _mapper.Map<Manga,MangaDto>(result);
         }
             
         public async Task<IEnumerable<MangaDto>> GetAll()
@@ -39,9 +46,14 @@ namespace Business.Implementation.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Update(MangaDto mangaDto)
+        public async Task Update(int id,MangaDto mangaDto)
         {
-            _mapper.Map<MangaDto, Manga>(mangaDto);
+            var entityToUpdate = await _dbContext.Mangas.FirstOrDefaultAsync(x => x.Id == id);
+            if (entityToUpdate is null)
+            {
+                throw new ArgumentException($"{nameof(id)} is not valid.");
+            }
+            _mapper.Map(mangaDto,entityToUpdate);
             await _dbContext.SaveChangesAsync();
         }
 

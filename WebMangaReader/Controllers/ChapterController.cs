@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Business.Abstraction;
 using Business.Models.DTO;
@@ -10,11 +9,11 @@ using Business.Models.DTO;
 namespace WebMangaReader.Controllers
 {
     [Route("api/[controller]")]
-    public class MangaController : Controller
+    public class ChapterController : Controller
     {
-        private readonly IMangaService _service;
+        private readonly IChapterService _service;
 
-        public MangaController(IMangaService service)
+        public ChapterController(IChapterService service)
         {
             _service = service;
         }
@@ -34,22 +33,22 @@ namespace WebMangaReader.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddManga([FromBody] MangaDto manga)
-        { 
-            await _service.Add(manga);
+        public async Task<IActionResult> AddChapter([FromBody] ChapterDto chapter)
+        {
+            await _service.Add(chapter);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateManga([FromBody] MangaDto manga, int id)
+        public async Task<IActionResult> UpdateChapter([FromBody] ChapterDto chapter, int id)
         {
-            await _service.Update(id,manga);
+            await _service.Update(id, chapter);
             return Ok();
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] MangaDto manga)
+        public async Task<IActionResult> Delete([FromBody] ChapterDto chapter)
         {
-            await _service.Delete(manga);
+            await _service.Delete(chapter);
             return Ok();
         }
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.IO;
+using System.Net.Http;
 
 namespace Business.Models.DTO
 {
@@ -9,5 +12,8 @@ namespace Business.Models.DTO
         public Guid Guid { get; set; }
         public ChapterDto Chapter { get; set; }    
         public int ChapterId { get; set; }
+        public IFormFile Content { get; set; }
+
+        public MyBlobInfo BlobInfo { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Data.Implementation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Data.Implementation.Migrations
 {
     [DbContext(typeof(MangaDbContext))]
-    partial class MangaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210414091307_fixContentType")]
+    partial class fixContentType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

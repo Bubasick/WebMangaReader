@@ -7,7 +7,9 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Business.Abstraction;
 using Business.Implementation.Extensions;
-using BlobInfo = Business.Models.BlobInfo;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using MyBlobInfo = Business.Models.MyBlobInfo;
 
 namespace Business.Implementation.Services
 {
@@ -19,12 +21,14 @@ namespace Business.Implementation.Services
         {
             _blobServiceClient = blobServiceClient;
         }
-        public async Task<BlobInfo> GetBlobAsync(string name)
+        public async Task<MyBlobInfo> GetBlobAsync(string guid)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient("pages");
-            var blobClient = containerClient.GetBlobClient(name);
+            var blobClient = containerClient.GetBlobClient(guid);
             var blobDownloadInfo =  await blobClient.DownloadAsync();
-            return new BlobInfo(blobDownloadInfo.Value.Content, blobDownloadInfo.Value.ContentType);
+            FormFile  file = new FormFile(blobDownloadInfo.Value.Content,blobDownloadInfo.Value.Content.Position, blobDownloadInfo.Value.ContentLength, guid, guid);
+            file.ContentType = blobDownloadInfo.Value.ContentType;
+            return new MyBlobInfo(blobDownloadInfo.Value.Content, blobDownloadInfo.Value.ContentType);
         }
 
         public async Task<IEnumerable<string>> ListBlobsAsync()
@@ -47,13 +51,14 @@ namespace Business.Implementation.Services
             await blobClient.UploadAsync(filePath, new BlobHttpHeaders {ContentType = filePath.GetContentType()});
         }
 
-        public async Task UploadContentBlobAsync(string content, string fileName)
+        public async Task UploadContentBlobAsync(IFormFile file, Guid guid)
         {
             var containerClient = _blobServiceClient.GetBlobContainerClient("pages");
-            var blobClient = containerClient.GetBlobClient(fileName);
-            var bytes = Encoding.UTF8.GetBytes(content);
-            await using var memoryStream = new MemoryStream(bytes);
-            await blobClient.UploadAsync(memoryStream, new BlobHttpHeaders {ContentType = fileName.GetContentType()});
+            var blobClient = containerClient.GetBlobClient(guid.ToString());
+            Stream imageStream = new MemoryStream();
+            await file.CopyToAsync(imageStream);
+            imageStream.Position = 0;
+            await blobClient.UploadAsync(imageStream, new BlobHttpHeaders {ContentType = file.ContentType,ContentDisposition = file.ContentDisposition});
 
         }
 

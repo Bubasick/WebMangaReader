@@ -8,12 +8,12 @@ using Business.Models;
 
 namespace WebMangaReader.Controllers
 {
-    [Route("blobs")]
-    public class BlobExplorerController : Controller
+    [Route("api/[controller]")]
+    public class BlobController : Controller
     {
         private readonly IBlobService _blobService;
 
-        public BlobExplorerController(IBlobService blobService)
+        public BlobController(IBlobService blobService)
         {
             _blobService = blobService;
         }
@@ -37,12 +37,12 @@ namespace WebMangaReader.Controllers
             await _blobService.UploadBlobFileAsync(request.FilePath, request.FileName);
             return Ok();
         }
-        [HttpPost("uploadcontent")]
-        public async Task<IActionResult> UploadContent([FromBody] UploadContentRequest request)
-        {
-            await _blobService.UploadContentBlobAsync(request.Content, request.FileName);
-            return Ok();
-        }
+    //    [HttpPost("uploadcontent")]
+      //  public async Task<IActionResult> UploadContent([FromBody] UploadContentRequest request)
+     //   {
+   //         await _blobService.UploadContentBlobAsync(request.Content, request.FileName);
+    //        return Ok();
+    //    }
         [HttpDelete("{blobName}")]
         public async Task<IActionResult> DeleteFile(string blobName)
         {
