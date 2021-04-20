@@ -36,19 +36,12 @@ namespace Business.Implementation.Services
           return pageDto;
 
         }
-        public async Task<IEnumerable<PageDto>> GetAll()
+        public async Task<IEnumerable<string>> GetAllByChapterId(int chapterId)
         {
             List<PageDto> result = new List<PageDto>();
-            var pages =  await _dbContext.Pages.ToListAsync();
-            
-            Parallel.ForEach(pages.AsParallel().AsOrdered(), async x =>
-            {
-                PageDto pageDto = new PageDto();
-                _mapper.Map(x, pageDto);
-               // pageDto.BlobInfo = await _blobService.GetBlobAsync(pageDto.Guid.ToString());
-                result.Add(pageDto);
-            });
-            return result;
+            var pages = await _dbContext.Pages.Where(x => x.ChapterId == chapterId).ToListAsync();
+            var links = pages.Select(x => "https://localhost:44325/api/page/" + $"{x.Id}");
+            return links;
         }
 
         public async Task Add(PageDto pageDto)
@@ -57,6 +50,15 @@ namespace Business.Implementation.Services
             pageDto.Guid = fileName;
             await _blobService.UploadContentBlobAsync(pageDto.Content, fileName); 
             await _dbContext.Pages.AddAsync(_mapper.Map<PageDto, Page>(pageDto));
+            await _dbContext.SaveChangesAsync();
+        }
+        public async Task DeleteById(int id)
+        {
+            var fileName = Guid.NewGuid();
+            var page = _dbContext.Pages.FirstOrDefault(x => x.Id == id);
+            if (page is null) throw new ArgumentException($"{nameof(id)} is not valid");
+            await _blobService.DeleteBlobAsync(page.Guid.ToString());
+            _dbContext.Pages.Remove(page);
             await _dbContext.SaveChangesAsync();
         }
     }

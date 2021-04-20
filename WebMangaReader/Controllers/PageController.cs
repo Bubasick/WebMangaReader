@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -26,16 +27,24 @@ namespace WebMangaReader.Controllers
             return File(result.BlobInfo.Content, result.BlobInfo.ContentType);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("chapterId/{chapterId}")]
+        public async Task<IActionResult> GetAllByChapterId(int chapterId)
         {
-            var result = await _service.GetAll();
+            var result = await _service.GetAllByChapterId(chapterId);
             return Ok(result);
         }
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] PageDto pageDto)
         {
+           
             await _service.Add(pageDto);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteById(int id)
+        { 
+            await _service.DeleteById(id); 
             return Ok();
         }
     }

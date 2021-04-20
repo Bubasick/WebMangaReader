@@ -31,18 +31,6 @@ namespace WebMangaReader.Controllers
             return Ok(await _blobService.ListBlobsAsync());
         }
 
-        [HttpPost("uploadFile")]
-        public async Task<IActionResult> UploadFile([FromBody] UploadFileRequest request)
-        {
-            await _blobService.UploadBlobFileAsync(request.FilePath, request.FileName);
-            return Ok();
-        }
-    //    [HttpPost("uploadcontent")]
-      //  public async Task<IActionResult> UploadContent([FromBody] UploadContentRequest request)
-     //   {
-   //         await _blobService.UploadContentBlobAsync(request.Content, request.FileName);
-    //        return Ok();
-    //    }
         [HttpDelete("{blobName}")]
         public async Task<IActionResult> DeleteFile(string blobName)
         {

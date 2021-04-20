@@ -11,7 +11,6 @@ namespace Business.Abstraction
     {
         Task<MyBlobInfo> GetBlobAsync(string guid);
         Task<IEnumerable<String>> ListBlobsAsync();
-        Task UploadBlobFileAsync(string filePath, string fileName);
         Task UploadContentBlobAsync(IFormFile content, Guid guid);
         Task DeleteBlobAsync(string blobName);
     }
