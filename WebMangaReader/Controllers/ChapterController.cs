@@ -24,6 +24,12 @@ namespace WebMangaReader.Controllers
             var result = await _service.GetById(id);
             return Ok(result);
         }
+        [HttpGet("{id}/pages")]
+        public async Task<IActionResult> GetAllPagesLinksById(int id)
+        {
+            var result = await _service.GetAllPagesLinksById(id);
+            return Ok(result);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()

@@ -24,7 +24,7 @@ namespace Business.Implementation.Services
 
         public async Task<ChapterDto> GetById(int id)
         {
-            var result = await _dbContext.Chapters.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await _dbContext.Chapters.Include(p => p.Pages).FirstOrDefaultAsync(x => x.Id == id);
             if (result is null)
             {
                 throw new ArgumentException($"{nameof(id)} is not valid.");
@@ -34,8 +34,16 @@ namespace Business.Implementation.Services
 
         public async Task<IEnumerable<ChapterDto>> GetAll()
         {
-            var result = await _dbContext.Chapters.ToListAsync();
+            var result = await _dbContext.Chapters.Include(p => p.Pages).ToListAsync();
             return _mapper.Map<IEnumerable<Chapter>, IEnumerable<ChapterDto>>(result);
+        }
+
+
+        public async Task<IEnumerable<string>> GetAllPagesLinksById(int id)
+        {
+            var chapter = await _dbContext.Chapters.Include(p => p.Pages).FirstOrDefaultAsync(x => x.Id == id);
+            var result = chapter.Pages.Select(page => "https://localhost:44325/api/page/" + $"{page.Id}");
+            return result;
         }
 
         public async Task Add(ChapterDto chapterDto)

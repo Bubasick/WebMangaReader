@@ -11,5 +11,7 @@ namespace Business.Abstraction
             Task Add(PageDto pageDto);
             Task DeleteById(int id);
 
+
+
     }
 }

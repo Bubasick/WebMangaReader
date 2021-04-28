@@ -11,4 +11,5 @@ namespace Data.Entities
         public int ChapterId { get; set; }
         public string ContentType { get; set; }
     }
+
 }
