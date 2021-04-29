@@ -39,7 +39,7 @@ namespace WebMangaReader.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddChapter([FromBody] ChapterDto chapter)
+        public async Task<IActionResult> AddChapter([FromForm] ChapterDto chapter)
         {
             await _service.Add(chapter);
             return Ok();
@@ -57,6 +57,7 @@ namespace WebMangaReader.Controllers
             await _service.Delete(chapter);
             return Ok();
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteById(int id)

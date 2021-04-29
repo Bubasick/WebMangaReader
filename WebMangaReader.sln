@@ -7,18 +7,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMangaReader", "WebMangaR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Entities", "Data.Entities\Data.Entities.csproj", "{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Abstraction", "Business.Abstraction\Business.Abstraction.csproj", "{46D8CF30-F52B-4C25-9CD2-7F695D8827A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Abstraction", "Business.Abstraction\Business.Abstraction.csproj", "{46D8CF30-F52B-4C25-9CD2-7F695D8827A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Implementation", "Business.Implementation\Business.Implementation.csproj", "{56B5C6E5-9D11-4609-A463-F4EAF52DE21E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Implementation", "Business.Implementation\Business.Implementation.csproj", "{56B5C6E5-9D11-4609-A463-F4EAF52DE21E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{46D8CF30-F52B-4C25-9CD2-7F695D8827A9} = {46D8CF30-F52B-4C25-9CD2-7F695D8827A9}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{85725CF9-39C2-44D4-A705-FC5447D42416}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Models", "Business.Models\Business.Models.csproj", "{E1344526-70F2-40F0-BF63-E39EA0273DB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Models", "Business.Models\Business.Models.csproj", "{E1344526-70F2-40F0-BF63-E39EA0273DB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Implementation", "Data.Implementation\Data.Implementation.csproj", "{1509364D-FE40-416C-8DEE-2A501DEFF431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Implementation", "Data.Implementation\Data.Implementation.csproj", "{1509364D-FE40-416C-8DEE-2A501DEFF431}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
