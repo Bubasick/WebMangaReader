@@ -1,23 +1,16 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Azure.Storage.Blobs;
 using Business.Abstraction;
 using Business.Implementation;
 using Business.Implementation.Services;
 using Data.Implementation;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace WebMangaReader
 {
@@ -38,15 +31,18 @@ namespace WebMangaReader
             ); ;
             services.AddSingleton(x =>
                 new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
-            services.AddSingleton<IBlobService,BlobService>();
-            services.AddDbContext<MangaDbContext>(x =>  x.UseNpgsql(Configuration.GetValue<string>("DefaultConnection")));
+            services.AddSingleton<IBlobService, BlobService>();
+            services.AddDbContext<MangaDbContext>(x => x.UseNpgsql(Configuration.GetValue<string>("DefaultConnection")));
             services.AddTransient<IMangaService, MangaService>();
             services.AddTransient<IChapterService, ChapterService>();
             services.AddTransient<IPageService, PageService>();
             var mapperConfig = new MapperConfiguration(c => c.AddProfile(new AutoMapperProfile()));
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-       
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,13 +52,35 @@ namespace WebMangaReader
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
+
+            app.UseStaticFiles();
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "ClientApp";
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }

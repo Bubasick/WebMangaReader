@@ -35,7 +35,7 @@ namespace WebMangaReader.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddManga([FromForm] MangaDto manga)
-        { 
+        {
             await _service.Add(manga);
             return Ok();
         }
@@ -43,7 +43,7 @@ namespace WebMangaReader.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateManga([FromBody] MangaDto manga, int id)
         {
-            await _service.Update(id,manga);
+            await _service.Update(id, manga);
             return Ok();
         }
         [HttpDelete]

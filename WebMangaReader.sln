@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMangaReader", "WebMangaReader\WebMangaReader.csproj", "{71EB132A-4D03-4828-B689-B66F94FB1E6B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Entities", "Data.Entities\Data.Entities.csproj", "{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Abstraction", "Business.Abstraction\Business.Abstraction.csproj", "{46D8CF30-F52B-4C25-9CD2-7F695D8827A9}"
@@ -20,16 +18,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business.Models", "Business
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Implementation", "Data.Implementation\Data.Implementation.csproj", "{1509364D-FE40-416C-8DEE-2A501DEFF431}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMangaReader", "WebMangaReader\WebMangaReader.csproj", "{0C1E5E68-9A85-4682-8302-B621DFBD41D1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E1344526-70F2-40F0-BF63-E39EA0273DB0} = {E1344526-70F2-40F0-BF63-E39EA0273DB0}
+		{46D8CF30-F52B-4C25-9CD2-7F695D8827A9} = {46D8CF30-F52B-4C25-9CD2-7F695D8827A9}
+		{1509364D-FE40-416C-8DEE-2A501DEFF431} = {1509364D-FE40-416C-8DEE-2A501DEFF431}
+		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949} = {F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}
+		{56B5C6E5-9D11-4609-A463-F4EAF52DE21E} = {56B5C6E5-9D11-4609-A463-F4EAF52DE21E}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71EB132A-4D03-4828-B689-B66F94FB1E6B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -50,12 +53,15 @@ Global
 		{1509364D-FE40-416C-8DEE-2A501DEFF431}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1509364D-FE40-416C-8DEE-2A501DEFF431}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1509364D-FE40-416C-8DEE-2A501DEFF431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C1E5E68-9A85-4682-8302-B621DFBD41D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C1E5E68-9A85-4682-8302-B621DFBD41D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C1E5E68-9A85-4682-8302-B621DFBD41D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C1E5E68-9A85-4682-8302-B621DFBD41D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{71EB132A-4D03-4828-B689-B66F94FB1E6B} = {85725CF9-39C2-44D4-A705-FC5447D42416}
 		{F6EF6664-AC90-4BF8-8FCF-EFCF7348F949} = {85725CF9-39C2-44D4-A705-FC5447D42416}
 		{46D8CF30-F52B-4C25-9CD2-7F695D8827A9} = {85725CF9-39C2-44D4-A705-FC5447D42416}
 		{56B5C6E5-9D11-4609-A463-F4EAF52DE21E} = {85725CF9-39C2-44D4-A705-FC5447D42416}

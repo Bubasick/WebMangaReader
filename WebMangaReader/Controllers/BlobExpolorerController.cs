@@ -21,7 +21,7 @@ namespace WebMangaReader.Controllers
         [HttpGet("{blobName}")]
         public async Task<IActionResult> GetBlob(string blobName)
         {
-            var data =  await _blobService.GetBlobAsync(blobName);
+            var data = await _blobService.GetBlobAsync(blobName);
             return File(data.Content, data.ContentType);
         }
 

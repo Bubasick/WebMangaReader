@@ -1,51 +1,60 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Business.Abstraction;
-using Business.Models.DTO;
 
 namespace WebMangaReader.Controllers
 {
-    [Route("api/[controller]")]
-    public class PageController : Controller
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.Eventing.Reader;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Business.Abstraction;
+    using Business.Models.DTO;
+
+    namespace WebMangaReader.Controllers
     {
-        private readonly IPageService _service;
-
-        public PageController(IPageService service)
+        [Route("api/[controller]")]
+        public class PageController : Controller
         {
-            _service = service;
-        }
+            private readonly IPageService _service;
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var result = await _service.GetById(id);
-            return File(result.BlobInfo.Content, result.BlobInfo.ContentType);
-        }
+            public PageController(IPageService service)
+            {
+                _service = service;
+            }
 
-        [HttpGet("chapterId/{chapterId}")]
-        public async Task<IActionResult> GetAllByChapterId(int chapterId)
-        {
-            var result = await _service.GetAllByChapterId(chapterId);
-            return Ok(result);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Add([FromForm] PageDto pageDto)
-        {
-           
-            await _service.Add(pageDto);
-            return Ok();
-        }
+            [HttpGet("{id}")]
+            public async Task<IActionResult> GetById(int id)
+            {
+                var result = await _service.GetById(id);
+                return File(result.BlobInfo.Content, result.BlobInfo.ContentType);
+            }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteById(int id)
-        { 
-            await _service.DeleteById(id); 
-            return Ok();
+            [HttpGet("chapterId/{chapterId}")]
+            public async Task<IActionResult> GetAllByChapterId(int chapterId)
+            {
+                var result = await _service.GetAllByChapterId(chapterId);
+                return Ok(result);
+            }
+            [HttpPost]
+            public async Task<IActionResult> Add([FromForm] PageDto pageDto)
+            {
+
+                await _service.Add(pageDto);
+                return Ok();
+            }
+
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> DeleteById(int id)
+            {
+                await _service.DeleteById(id);
+                return Ok();
+            }
         }
     }
 }
