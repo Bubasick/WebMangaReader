@@ -34,7 +34,7 @@ namespace WebMangaReader.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddManga([FromBody] MangaDto manga)
+        public async Task<IActionResult> AddManga([FromForm] MangaDto manga)
         { 
             await _service.Add(manga);
             return Ok();

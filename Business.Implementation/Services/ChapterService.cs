@@ -10,6 +10,7 @@ using Business.Models.DTO;
 using Data.Entities;
 using Data.Implementation;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Implementation.Services
@@ -53,9 +54,10 @@ namespace Business.Implementation.Services
 
         public async Task Add(ChapterDto chapterDto)
         {
-            if(chapterDto.PageArchive.ContentType != "application/zip") throw new ArgumentException("You must upload a zip file!");
+            if(chapterDto.PageArchive.ContentType != "application/zip" && chapterDto.PageArchive.ContentType != "application/x-cbr") throw new ArgumentException("You must upload a zip file!");
             Stream stream = new MemoryStream();
             chapterDto.PageArchive.CopyTo(stream);
+            chapterDto.Name = chapterDto.PageArchive.FileName;
             var tempFolderName = Guid.NewGuid().ToString();
             //TODO: change paths to relative and stash them somewhere else
             string path = "../temp/" + tempFolderName + "/";
@@ -73,13 +75,17 @@ namespace Business.Implementation.Services
             await _dbContext.SaveChangesAsync();
             int chapterId = await _dbContext.Chapters.OrderByDescending(x => x.Id).Select(x => x.Id)
                 .FirstOrDefaultAsync();
-            DirectoryInfo d = new DirectoryInfo(path);//Assuming Test is your Folder
-            FileInfo[] Files = d.GetFiles("*.jpeg"); //Getting jpg files
+            DirectoryInfo directory = new DirectoryInfo(path);//Assuming Test is your Folder
+            FileInfo[] Files = directory.GetFiles(); //Getting all files
+
             foreach (FileInfo fileInfo in Files)
             {
                 await using (FileStream file = File.OpenRead(path + fileInfo.Name))
                 {
-                    if(fileInfo.Extension!=".jpeg") throw new ArgumentException($"{fileInfo.Name} + must have an jpg extension!");
+                    string contentType;
+                    new FileExtensionContentTypeProvider().TryGetContentType(file.Name, out contentType);
+                    if (contentType != "image/png" && contentType != "image/jpeg") throw new ArgumentException($"{fileInfo.Name} + must be an image!");
+
                     MemoryStream buffer =  new MemoryStream();
                     file.CopyTo(buffer);
                     buffer.Position = 0;
@@ -87,7 +93,7 @@ namespace Business.Implementation.Services
                     IFormFile formFile = new FormFile(buffer,0,buffer.Length, fileInfo.Name,fileInfo.Name)
                     {
                         Headers = new HeaderDictionary(),
-                        ContentType = "image/jpeg",
+                        ContentType = contentType,
                         ContentDisposition = "form-data"
                     }; 
                     PageDto page = new PageDto();
@@ -98,6 +104,7 @@ namespace Business.Implementation.Services
                 }
             }
             Directory.Delete(path, true);
+            
         }
 
         public async Task Update(int id, ChapterDto chapterDto)
